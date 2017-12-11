@@ -12,7 +12,10 @@ class Master:
 
     def open_file(self, file):
         success, self.bs, self.interesting = self.io.open_file(file)
-        self.interactive = self.retrieve_interactive()
+        if success:
+            self.interactive = self.retrieve_interactive()
+        else:
+            self.interactive = None
         return success
 
     def close_file(self):
@@ -33,3 +36,18 @@ class Master:
     def get_bs(self):
         return self.bs
 
+    def add_sweep(self, i, begin, end, step):
+        self.combinator.add_sweep(i, begin, end, step)
+
+    def execute(self):
+        combinations = self.combinator.get_combinations()
+        print(combinations)
+        for comb in combinations:
+            i, val = comb[0], comb[1]
+            param = self.interactive[i]
+            print(self.interesting[param])
+            if self.interesting[param] == 'declaration':
+                changer = param[:].split('=')
+                changer[-1] = "= " + val
+                changer = ''.join(changer)
+                print("%s, %s" % (param, changer))

@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup
+import os
 
 
 class File:
@@ -9,7 +10,9 @@ class File:
         if self.file is not None:
             self.file.close()
         try:
-            self.file = open(file_name, 'r+')
+            path = os.getcwd().replace("\\", "/")
+            path += '/'+file_name
+            self.file = open(path, 'r+')
             self.file_name = file_name
             return True
         except IOError:
@@ -18,6 +21,6 @@ class File:
     def get_bs(self):
         return BeautifulSoup(self.file.read())
 
-    def close_file(self, file):
-        if file is not None:
+    def close_file(self):
+        if self.file is not None:
             self.file.close()

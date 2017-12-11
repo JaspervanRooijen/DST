@@ -1,6 +1,4 @@
 from File import *
-from bs4 import BeautifulSoup
-
 
 class IO:
     file = File()
@@ -10,9 +8,10 @@ class IO:
     def open_file(self, file):
         if self.file.open_file(file):
             self.bs = self.file.get_bs()
-            parameters = self.get_parameters()
+            self.interesting = self.get_parameters()
             return True, self.bs, self.interesting
-
+        else:
+            return False, None, None
 
     def get_parameters(self):
         if self.interesting is not None:
@@ -42,3 +41,4 @@ class IO:
         self.bs = None
         self.interesting = None
         self.file.close_file()
+        print('Program closed correctly')
