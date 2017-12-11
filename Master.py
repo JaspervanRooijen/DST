@@ -1,14 +1,18 @@
 from IO import *
 from Combinator import *
+from Verifier import *
+import os
 
 
 class Master:
     io = IO()
     combinator = Combinator()
+    verifier = Verifier()
 
     bs = None
     interesting = None
     interactive = None
+    query = os.getcwd().replace("\\", "/")+"/tmp/TWES.q"    # Todo: make this adjustable
 
     def open_file(self, file):
         success, self.bs, self.interesting = self.io.open_file(file)
@@ -42,12 +46,15 @@ class Master:
     def execute(self):
         combinations = self.combinator.get_combinations()
         print(combinations)
+        file = None
         for comb in combinations:
             i, val = comb[0], comb[1]
             param = self.interactive[i]
             print(self.interesting[param])
             if self.interesting[param] == 'declaration':
                 changer = param[:].split('=')
-                changer[-1] = "= " + val
+                changer[-1] = "= " + str(val)
                 changer = ''.join(changer)
-                print("%s, %s" % (param, changer))
+                print(changer)
+                file = self.io.create_combination(param, changer)
+            print(self.verifier.verify(file, self.query))

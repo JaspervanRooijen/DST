@@ -1,4 +1,6 @@
 from File import *
+import copy
+
 
 class IO:
     file = File()
@@ -42,3 +44,18 @@ class IO:
         self.interesting = None
         self.file.close_file()
         print('Program closed correctly')
+
+    def create_combination(self, param, changer):
+        copy_bs = copy.copy(self.bs)
+        for decl in copy_bs.findAll('declaration'):
+            # print(str(decl.string))
+            # print(param)
+
+            if param in str(decl.string):
+                # print("Param in string!")
+                decl.string = str(decl.string).replace(param, changer)
+                print(str(decl.string))
+                break
+        file = self.file.write_file(str(copy_bs))
+        return file
+

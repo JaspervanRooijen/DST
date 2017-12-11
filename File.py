@@ -24,3 +24,14 @@ class File:
     def close_file(self):
         if self.file is not None:
             self.file.close()
+
+    def write_file(self, cont):
+        path = os.getcwd().replace("\\", "/")
+        path += '/tmp'
+        if not os.path.exists(path):
+            os.makedirs(path)
+        path += '/model1.xml'
+        f = open(path, 'w')
+        f.write(cont)
+        f.close()
+        return f
