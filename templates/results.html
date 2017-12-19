@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js"></script>
+	<!--<script>-->
+	<!--</script>-->
+</head>
+<body>
+	{{data}}
+	<canvas id="myChart" width="1000" height="500"></canvas>
+	<script>
+    d = {{ data | safe }}
+	data = [];
+	label = [];
+	for (var sweep in d) {
+		mean = d[sweep].split('=')[1];
+		data.push(parseFloat(mean));
+		l = sweep
+		label.push(parseInt(l));
+	}
+	ctx = document.getElementById("myChart");
+	myLineChart = new Chart(ctx, {
+		type: 'line',
+		data:{
+			labels: label,
+			datasets: [{
+				data: data,
+			}]
+		}
+	});
+	</script>
+
+</body>
+</html>
