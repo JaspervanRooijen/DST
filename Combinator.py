@@ -4,7 +4,9 @@ class Combinator:
     sweeps = []
 
     def add_sweep(self, i, begin, end, step):
+        self.sweeps = []
         self.sweeps.append((i, begin, end, step))
+        # print(self.sweeps)
 
     def get_combinations(self):
         # ToDo: add functionality for multiple sweeps in parallel.

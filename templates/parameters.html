@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    {% if parameters %}
+    <div class="table">
+        <table class="table-striped">
+            <tr>
+                <th>
+                    Parameters
+                </th>
+                <th>
+                    Sweep
+                </th>
+                <!--<th>-->
+                <!--Ending value-->
+                <!--</th>-->
+                <!--<th>-->
+                <!--Steps-->
+                <!--</th>-->
+                <!--<th>-->
+                <!--Confirm-->
+                <!--</th>-->
+            </tr>
+            {% for par in parameters %}
+            <tr>
+                <td>
+                    {{ par }}
+                </td>
+                <td>
+                    <form action="/data" name="form">
+                        Starting value:
+                        <input type="hidden" name="parameter" value="{{ par }}">
+                        <input type="number" name="start"><br>
+                        Stopping value:
+                        <input type="number" name="stop"><br>
+                        Step:
+                        <input type="number" name="step"><br>
+                        <input type="submit" value="Submit">
+                    </form>
+                </td>
+                <!--<td>-->
+                <!--Fill in starting value here-->
+                <!--</td>-->
+                <!--<td>-->
+                <!--Fill in ending value here-->
+                <!--</td>-->
+                <!--<td>-->
+                <!--Default step: 1-->
+                <!--</td>-->
+                <!--<td>-->
+                <!--Confirm-->
+                <!--</td>-->
+                <!--</tr>-->
+                {% endfor %}
+        </table>
+    </div>
+    <br>
+    <div class="col-sm-12 text-center">
+        <!--<button class="btn btn-primary" title="Submit">Execute</button>-->
+        <a href="/execute" class="btn btn-info" role="button">Execute</a>
+<!--<button type="button" class="btn btn-info">Button</button>-->
+    </div>
+    <br><br>
+    {% endif %}
+</div>
+
+
+{% endblock %}

@@ -44,17 +44,25 @@ class Master:
         self.combinator.add_sweep(i, begin, end, step)
 
     def execute(self):
+        result = {}
         combinations = self.combinator.get_combinations()
         print(combinations)
         file = None
         for comb in combinations:
+            # print('interactive = ' + str(self.interactive))
             i, val = comb[0], comb[1]
             param = self.interactive[i]
-            print(self.interesting[param])
+            print('interesting[param] = ' + self.interesting[param])
+            print('val = ' + str(val))
+            print('index = ' + str(i))
+            print('param = ' + param)
             if self.interesting[param] == 'declaration':
                 changer = param[:].split('=')
                 changer[-1] = "= " + str(val)
                 changer = ''.join(changer)
-                print(changer)
+                print('changer = ' + changer)
                 file = self.io.create_combination(param, changer)
-            print(self.verifier.verify(file, self.query))
+            mean = self.verifier.verify(file, self.query)
+            result[str(val)] = mean
+        return result
+
