@@ -3,14 +3,24 @@
 {% block content %}
 <div class="container">
     {% if parameters %}
-    <div class="table">
-        <table class="table-striped">
+    <div class="table-striped">
+        <table class="table">
+
             <tr>
                 <th>
                     Parameters
                 </th>
                 <th>
-                    Sweep
+                    Start value
+                </th>
+                <th>
+                    Ending value
+                </th>
+                <th>
+                    Step size
+                </th>
+                <th>
+                    Submit
                 </th>
                 <!--<th>-->
                 <!--Ending value-->
@@ -27,17 +37,21 @@
                 <td>
                     {{ par }}
                 </td>
-                <td>
-                    <form action="/data" name="form">
-                        Starting value:
-                        <input type="hidden" name="parameter" value="{{ par }}">
+                <form action="/data" name="form">
+                    <input type="hidden" name="parameter" value="{{ par }}">
+                    <td>
                         <input type="number" name="start"><br>
-                        Stopping value:
+                    </td>
+                    <td>
                         <input type="number" name="stop"><br>
-                        Step:
+                    </td>
+                    <td>
                         <input type="number" name="step"><br>
+                    </td>
+                    <td>
                         <input type="submit" value="Submit">
-                    </form>
+                    </td>
+                </form>
                 </td>
                 <!--<td>-->
                 <!--Fill in starting value here-->
@@ -53,15 +67,56 @@
                 <!--</td>-->
                 <!--</tr>-->
                 {% endfor %}
+            </tr>
+
+        </table>
+    </div>
+    {% endif %}
+    <br>
+    {% if sweeps %}
+    {% if parameters %}
+    <div class="table-striped">
+        <table class="table">
+            <tr>
+                <th>
+                    Current Sweep
+                </th>
+                <th>
+                    Start value
+                </th>
+                <th>
+                    Stop value
+                </th>
+                <th>
+                    Step value
+                </th>
+            </tr>
+            {% for sweep in sweeps %}
+            <tr>
+                <td>
+                    {{ parameters[sweep[0]] }}
+                </td>
+                <td>
+                    {{ sweep[1] }}
+                </td>
+                <td>
+                    {{ sweep[2] }}
+                </td>
+                <td>
+                    {{ sweep[3] }}
+                </td>
+            </tr>
+            {% endfor %}
         </table>
     </div>
     <br>
     <div class="col-sm-12 text-center">
         <!--<button class="btn btn-primary" title="Submit">Execute</button>-->
         <a href="/execute" class="btn btn-info" role="button">Execute</a>
-<!--<button type="button" class="btn btn-info">Button</button>-->
+        <!--<button type="button" class="btn btn-info">Button</button>-->
     </div>
     <br><br>
+    {% endif %}
     {% endif %}
 </div>
 

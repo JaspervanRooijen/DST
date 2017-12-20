@@ -62,7 +62,12 @@ class Master:
                 changer = ''.join(changer)
                 print('changer = ' + changer)
                 file = self.io.create_combination(param, changer)
+            with open(self.query, 'r') as f:
+                print(f.read())
+
             mean = self.verifier.verify(file, self.query)
             result[str(val)] = mean
         return result
 
+    def get_sweeps(self):
+        return self.combinator.get_sweeps()

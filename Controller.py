@@ -8,6 +8,7 @@ class Controller:
 
     def __init__(self):
         print('hello')
+        # self.main('openFile Side9dec2017b.xml')
         self.main('openFile OctTWES.xml')
         print('success')
         self.view = GuiView(self)
@@ -38,6 +39,9 @@ class Controller:
             self.master.close_file()
         elif command[0] == 'exit':
             self.master.close_file()
+
+    def get_sweeps(self):
+        return self.master.get_sweeps()
 
 
 c = Controller()

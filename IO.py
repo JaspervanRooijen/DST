@@ -21,17 +21,17 @@ class IO:
         else:
             interesting = dict()
             # Find all transitions
-            transitions = self.bs.findAll('transition')
-            for trans in transitions:
-                for label in trans.findAll('label'):
-                    if label['kind'] == 'probability':
-                        interesting[trans] = 'transition'
-                        # print("Added: %s \n" % trans)
+            # transitions = self.bs.findAll('transition')
+            # for trans in transitions:
+            #     for label in trans.findAll('label'):
+            #         if label['kind'] == 'probability':
+            #             interesting[trans] = 'transition'
+            #             # print("Added: %s \n" % trans)
 
             # Find all ints in the global declarations
             for decl in str(self.bs.findAll('declaration')).split('\n'):
-                if decl[:4] == 'int ':
-                    interesting[decl.split(';')[0]] = 'declaration'
+                # if decl[:4] == 'int ':
+                #     interesting[decl.split(';')[0]] = 'declaration'
                 if decl[:10] == 'const int ':
                     # print("Added: %s \n" % decl.split(';')[0])
                     interesting[decl.split(';')[0]] = 'declaration'

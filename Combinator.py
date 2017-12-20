@@ -21,3 +21,6 @@ class Combinator:
                 print("Begin: %d, End: %d, Bigger? %s" % (begin, end, begin <= end))
 
         return combs
+
+    def get_sweeps(self):
+        return self.sweeps
