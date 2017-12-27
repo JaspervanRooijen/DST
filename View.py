@@ -1,5 +1,7 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 import json
+import os
+from werkzeug.utils import secure_filename
 
 
 class TuiView:
@@ -43,6 +45,15 @@ class TuiView:
 app = Flask(__name__)
 gui = None
 
+UPLOAD_FOLDER_creator = str(__file__).split('\\')
+UPLOAD_FOLDER_creator[-1] = 'uploads'
+UPLOAD_FOLDER = '\\'.join(UPLOAD_FOLDER_creator)
+
+ALLOWED_EXTENSIONS = ['xml']
+
+app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
 
 class GuiView:
     thread = None
@@ -52,7 +63,10 @@ class GuiView:
         global gui
         gui = self
         self.controller = controller
-        run()
+        try:
+            run()
+        finally:
+            self.controller.quit()
 
     def quit(self):
         self.thread.join()
@@ -62,17 +76,31 @@ def run():
     app.run()
 
 
-@app.route('/')
-def hello_world():
-    return 'Hello World!'
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-# @app.route('/data')
-# def show_data():
-#     parameters, interactive, bs = gui.controller.main('parameters')
-#     print(parameters)
-#     print(interactive)
-#     return render_template('parameters.html', parameters=interactive)
+@app.route('/', methods=['GET', 'POST'])
+def upload_file():
+    global gui
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        # if user does not select file, browser also
+        # submit a empty part without filename
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            gui.controller.main('openFile %s' % os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect('/data')
+    return render_template('upload_file.html')
 
 
 @app.route('/data', methods=['GET', ])
@@ -105,8 +133,17 @@ def add_sweep():
 
 @app.route('/execute')
 def execute():
-    print('Wow')
+    # print('Wow')
     result = gui.controller.main('execute')
     print(result)
 
     return render_template('results.html', data=json.dumps(result))
+
+
+@app.route('/simulate')
+def simulate():
+    global gui
+    amount = request.args.get('sims', '')
+    query = request.args.get('query', '')
+    result = gui.controller.simulate(amount, query)
+    return "Enough for now"

@@ -7,10 +7,6 @@ class Controller:
     master = Master()
 
     def __init__(self):
-        print('hello')
-        # self.main('openFile Side9dec2017b.xml')
-        self.main('openFile OctTWES.xml')
-        print('success')
         self.view = GuiView(self)
         return
 
@@ -42,6 +38,13 @@ class Controller:
 
     def get_sweeps(self):
         return self.master.get_sweeps()
+
+    def quit(self):
+        print('Graceful exit!')
+        quit(0)
+
+    def simulate(self, amount, query):
+        self.master.simulate(amount, query)
 
 
 c = Controller()

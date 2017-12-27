@@ -46,28 +46,57 @@ class Master:
     def execute(self):
         result = {}
         combinations = self.combinator.get_combinations()
-        print(combinations)
+        # print(combinations)
         file = None
         for comb in combinations:
             # print('interactive = ' + str(self.interactive))
             i, val = comb[0], comb[1]
             param = self.interactive[i]
-            print('interesting[param] = ' + self.interesting[param])
+            # print('interesting[param] = ' + self.interesting[param])
             print('val = ' + str(val))
-            print('index = ' + str(i))
-            print('param = ' + param)
+            # print('index = ' + str(i))
+            # print('param = ' + param)
             if self.interesting[param] == 'declaration':
                 changer = param[:].split('=')
                 changer[-1] = "= " + str(val)
                 changer = ''.join(changer)
-                print('changer = ' + changer)
+                # print('changer = ' + changer)
                 file = self.io.create_combination(param, changer)
             with open(self.query, 'r') as f:
                 print(f.read())
-
             mean = self.verifier.verify(file, self.query)
             result[str(val)] = mean
         return result
 
     def get_sweeps(self):
         return self.combinator.get_sweeps()
+
+    def simulate(self, amount, query):
+        print('simulating!!')
+        result = {}
+        combinations = self.combinator.get_combinations()
+        # print(combinations)
+        file = None
+        for comb in combinations:
+            # print('interactive = ' + str(self.interactive))
+            i, val = comb[0], comb[1]
+            param = self.interactive[i]
+            # print('interesting[param] = ' + self.interesting[param])
+            print('val = ' + str(val))
+            # print('index = ' + str(i))
+            # print('param = ' + param)
+            if self.interesting[param] == 'declaration':
+                changer = param[:].split('=')
+                changer[-1] = "= " + str(val)
+                changer = ''.join(changer)
+                # print('changer = ' + changer)
+                file = self.io.create_combination(param, changer)
+            # with open(self.query, 'r') as f:
+            #     print(f.read())
+
+            q = 'simulate %s [<=888] {%s}' % (str(amount), query)   #Todo: Fix hardcode final time
+
+            res = self.verifier.simulate(file, q)
+        return result
+
+

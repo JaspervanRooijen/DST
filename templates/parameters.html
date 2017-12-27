@@ -110,10 +110,28 @@
         </table>
     </div>
     <br>
-    <div class="col-sm-12 text-center">
-        <!--<button class="btn btn-primary" title="Submit">Execute</button>-->
-        <a href="/execute" class="btn btn-info" role="button">Execute</a>
-        <!--<button type="button" class="btn btn-info">Button</button>-->
+    <div class="row">
+        <div class="col"/>
+        <div class="col text-center">
+            <!--<button class="btn btn-primary" title="Submit">Execute</button>-->
+            <a href="/execute" class="btn btn-info" role="button">Execute</a>
+            <!--<button type="button" class="btn btn-info">Button</button>-->
+            <br><br>
+            <form action="/simulate" name="form">
+                <td>
+                    Amount of simulations:
+                    <input type="number" name="sims"><br>
+                </td>
+                <td>
+                    Required data:
+                    <input type="text" name="query"><br>
+                </td>
+                <td>
+                    <input type="submit" class="btn btn-info" value="Simulate">
+                </td>
+            </form>
+        </div>
+        <div class="col"/>
     </div>
     <br><br>
     {% endif %}
