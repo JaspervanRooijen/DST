@@ -5,6 +5,10 @@ from werkzeug.utils import secure_filename
 
 
 class TuiView:
+    """
+    The class that was historically used as a Textual User Interface. Has not (yet) been updated to current Controller
+    standards. Until update, this class is undocumented.
+    """
     def loop(self, controller):
         while True:
             command = input('>').split(" ")
@@ -42,6 +46,11 @@ class TuiView:
             print("")
 
 
+
+"""
+Basic initialisation for the GUI. A Flask application is initialised (but not started!). An upload folder is specified,
+as well as allowed extensions.
+"""
 app = Flask(__name__)
 gui = None
 
@@ -56,10 +65,21 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
 class GuiView:
+    """
+    Graphical Interface that is inferred by the Controller and handles all user input and output. Once started, most
+    power of the Controller is outsourced to this class, in order to give the user full control over the application.
+    In the end GuiView will always return to the Controller.
+    """
     thread = None
     controller = None
 
     def __init__(self, controller):
+        """
+        Inferred by the Controller in order to start the GUI. The Controller object is stored within the class and the
+        Flask application is started. After this, the class outsources the user input and output to the Flask
+        application until it returns to the Controller.
+        :param controller:
+        """
         global gui
         gui = self
         self.controller = controller
@@ -68,21 +88,36 @@ class GuiView:
         finally:
             self.controller.quit()
 
+    # Todo: Check if this is used, otherwise: delete
     def quit(self):
         self.thread.join()
 
 
 def run():
+    """
+    Starts the Flask application, which has been initialised earlier.
+    :return: None
+    """
     app.run()
 
 
 def allowed_file(filename):
+    """
+    Checks if the uploaded file is allowed to be uploaded, as defined globally.
+    :param filename: The filename of the file that is requested to be uploaded.
+    :return: Boolean, file is either allowed to be uploaded, or not.
+    """
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
+    """
+    The part of the Flask application situated at the root. Allows for the uploading of UPPAAL-models that can be used
+    within the application afterwards. Only one UPPAAL-model at a time is allowed to be uploaded.
+    :return: upload_file.html, containing the form for uploading files.
+    """
     global gui
     if request.method == 'POST':
         # check if the post request has the file part
@@ -105,6 +140,11 @@ def upload_file():
 
 @app.route('/data', methods=['GET', ])
 def add_sweep():
+    """
+    The part of the Flask application that allows viewing all parameters detected within the UPPAAL system, adding
+    parameter sweeps as well as start executing a data sweep or simulation.
+    :return: parameters.html, updated with current information about parameters and sweeps in the Model.
+    """
     global gui
     start = request.args.get('start', '')
     stop = request.args.get('stop', '')
@@ -133,6 +173,11 @@ def add_sweep():
 
 @app.route('/execute')
 def execute():
+    """
+    The part of the Flask application that shows the results of an executed data sweep over a parameter, as defined in
+    the add_sweep-method.
+    :return: results.html, updated with information retrieved from the execution of the data sweep.
+    """
     # print('Wow')
     result = gui.controller.main('execute')
     print(result)
@@ -142,6 +187,11 @@ def execute():
 
 @app.route('/simulate')
 def simulate():
+    """
+    The part of the Flask application that shows the results of an executed simulation order, as defined in the
+    add_sweep-method.
+    :return: 
+    """""
     global gui
     amount = request.args.get('sims', '')
     query = request.args.get('query', '')
