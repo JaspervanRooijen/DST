@@ -196,4 +196,30 @@ def simulate():
     amount = request.args.get('sims', '')
     query = request.args.get('query', '')
     result = gui.controller.simulate(amount, query)
+    # print(result)
+    all_sets = {}
+    for key in result.keys():
+        datasets = []
+        for data in result[key]:
+            dataset = []
+            data = data.split('(')
+            for point in data:
+
+                point = point.split(',')
+                print(point)
+                if len(point) == 2:
+                    point[1].replace(')', '')
+                    p = {}
+                    # try:
+                    p['x'] = int(point[0])
+                    p['y'] = int(point[1])
+                    # except ValueError:
+                        # print('raaaah' + str(point))
+                    dataset.append(p)
+                else:
+                    datasets.append(dataset)
+                    dataset = []
+
+        all_sets[key] = datasets
+    # print(all_sets)
     return "Enough for now"

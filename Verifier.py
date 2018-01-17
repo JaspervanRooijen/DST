@@ -27,7 +27,18 @@ class Verifier:
         print('QueryFile: ' + f.name)
         f.close()
         verify = subprocess.check_output(["verifyta", file.name, f.name], shell=True)
-        str_verify = str(verify)
-        print(str_verify)
-        return verify
+        str_verify = str(verify.decode())
+        str_verify = str_verify.split('\n')
+
+        # print('\n\n')
+        result = []
+        for i in range(0, len(str_verify)):
+            if len(str_verify[i]) > 0 and str_verify[i][0] == '[':
+                str_verify[i] = str_verify[i].replace('\r', '')
+                result.append(str_verify[i])
+
+        # print(result)
+        # print('\n\n')
+
+        return result
 

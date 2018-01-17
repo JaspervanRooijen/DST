@@ -97,6 +97,11 @@ class Master:
             q = 'simulate %s [<=888] {%s}' % (str(amount), query)   #Todo: Fix hardcode final time
 
             res = self.verifier.simulate(file, q)
+            # print('\n\n')
+            # print(res)
+            # print('\n')
+            # print(val)
+            result[val] = res
         return result
 
 

@@ -94,7 +94,7 @@ class Controller:
         > simulate(2, 'cost')
         > [ [ (0,0), (1,1), (2,2) ], [ (0,0), (1,2), (2,2) ] ]
         """
-        self.master.simulate(amount, query)
+        return self.master.simulate(amount, query)
 
 
 c = Controller()
