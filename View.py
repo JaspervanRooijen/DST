@@ -199,27 +199,27 @@ def simulate():
     # print(result)
     all_sets = {}
     for key in result.keys():
+        print('key: %s' % key)
         datasets = []
         for data in result[key]:
+            print('data: %s' % data)
             dataset = []
             data = data.split('(')
             for point in data:
+                print('point: %s' % point)
 
                 point = point.split(',')
-                print(point)
                 if len(point) == 2:
-                    point[1].replace(')', '')
-                    p = {}
-                    # try:
-                    p['x'] = int(point[0])
-                    p['y'] = int(point[1])
-                    # except ValueError:
-                        # print('raaaah' + str(point))
+                    point[1] = point[1].replace(')', '')
+                    p = {'x': float(point[0]), 'y': float(point[1])}
                     dataset.append(p)
-                else:
-                    datasets.append(dataset)
-                    dataset = []
-
+                # else:
+                #     print('\n\n\n'+str(dataset)+'\n\n\n')
+                #     datasets.append(dataset)
+                #     dataset = []
+                #     print(datasets)
+            datasets.append(dataset)
+            print('dataset: %s' % dataset)
         all_sets[key] = datasets
-    # print(all_sets)
-    return "Enough for now"
+        print('all_sets: %s' % all_sets)
+    return render_template('simulations.html', data=json.dumps(all_sets))

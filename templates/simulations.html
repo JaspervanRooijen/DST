@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+Bliepbloep
+
+
+<br><br><br>
+
+
+
+<script>
+    var datasets = {{data | safe}};
+
+    for (var sweepValue in datasets) {
+        var dataset = datasets[sweepValue];
+        var name = 'chart'+sweepValue.toString();
+        document.write("<canvas id="+name+" width=\"400\" height=\"400\"></canvas>");
+
+        var ctx = document.getElementById(name);
+        var chart = new Chart(ctx, {
+            type:'line',
+            data: dataset
+        })
+    }
+
+    function createCanvas(name, data) {
+        canvas = "<canvas id="+name+" width=\"1000\" height=\"500\"></canvas> \
+        ctx = document.getElementById({{dataset}}); \
+        myLineChart = new Chart(ctx, { \
+            type: 'line', \
+            data: { \
+                labels: label, \
+                datasets: [{ \
+                    data:"+data+", \
+                    lineTension: 0, \
+                }], \
+                options: [{}] \
+            } \
+        });";
+
+    }
+
+
+
+//    var datasets = {{data | safe}};
+//
+//    for (var sweepValue in datasets) {
+//        var dataset = datasets[sweepValue];
+//        document.write(sweepValue);
+//        document.write("<br>");
+//        for (var path in dataset) {
+//            for (var point in dataset[path]) {
+//                document.write(dataset[path][point]["x"]);
+//                document.write("<br>");
+//                document.write(dataset[path][point]["y"]);
+//                document.write("<br>");
+//            }
+//            document.write("<br>");
+//            document.write("<br>");
+//        }
+//    }
+
+
+</script>
+
+{% endblock %}
