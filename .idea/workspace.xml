@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="20e0034a-ca05-41d8-bc55-4478ef5f1525" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/simulations.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/View.py" afterPath="$PROJECT_DIR$/View.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/base.html" afterPath="$PROJECT_DIR$/templates/base.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/results.html" afterPath="$PROJECT_DIR$/templates/results.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/simulations.html" afterPath="$PROJECT_DIR$/templates/simulations.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -32,8 +30,8 @@
       <file leaf-file-name="View.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/View.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="573">
-              <caret line="224" column="73" lean-forward="false" selection-start-line="224" selection-start-column="73" selection-end-line="224" selection-end-column="73" />
+            <state relative-caret-position="335">
+              <caret line="210" column="40" lean-forward="true" selection-start-line="210" selection-start-column="40" selection-end-line="210" selection-end-column="40" />
               <folding>
                 <element signature="e#0#68#0" expanded="true" />
               </folding>
@@ -41,27 +39,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="simulations.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="simulations.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/simulations.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="19" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="19" />
-              <folding>
-                <marker date="1516661167018" expanded="true" signature="617:983" ph="..." />
-                <marker date="1516661167018" expanded="true" signature="709:981" ph="{&quot;type&quot;: 'line'...}" />
-                <marker date="1516661167018" expanded="true" signature="759:969" ph="{&quot;labels&quot;: label...}" />
-                <marker date="1516661167018" expanded="true" signature="822:920" ph="[...]" />
-                <marker date="1516661167018" expanded="true" signature="823:919" ph="{...}" />
-              </folding>
+            <state relative-caret-position="58">
+              <caret line="14" column="34" lean-forward="false" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="results.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="results.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/results.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="425">
-              <caret line="25" column="31" lean-forward="true" selection-start-line="25" selection-start-column="31" selection-end-line="25" selection-end-column="31" />
+              <caret line="25" column="31" lean-forward="false" selection-start-line="25" selection-start-column="31" selection-end-line="25" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -71,7 +63,7 @@
         <entry file="file://$PROJECT_DIR$/templates/base.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
-              <caret line="9" column="90" lean-forward="false" selection-start-line="9" selection-start-column="90" selection-end-line="9" selection-end-column="90" />
+              <caret line="9" column="80" lean-forward="false" selection-start-line="9" selection-start-column="80" selection-end-line="9" selection-end-column="80" />
               <folding />
             </state>
           </provider>
@@ -163,9 +155,9 @@
         <option value="$PROJECT_DIR$/Verifier.py" />
         <option value="$PROJECT_DIR$/Master.py" />
         <option value="$PROJECT_DIR$/View.py" />
-        <option value="$PROJECT_DIR$/templates/simulations.html" />
-        <option value="$PROJECT_DIR$/templates/base.html" />
         <option value="$PROJECT_DIR$/templates/results.html" />
+        <option value="$PROJECT_DIR$/templates/base.html" />
+        <option value="$PROJECT_DIR$/templates/simulations.html" />
       </list>
     </option>
   </component>
@@ -314,7 +306,14 @@
       <option name="project" value="LOCAL" />
       <updated>1516232838856</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="last fixes for charts data import needed">
+      <created>1516661417072</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1516661417072</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -384,7 +383,8 @@
     <MESSAGE value="Started implementing simulate functionality; basic retrieving implemented in terminal" />
     <MESSAGE value="Added documentation to Controller class;&#10;Added documentation to View class" />
     <MESSAGE value="simulations added apart from little parsing in View.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="simulations added apart from little parsing in View.py" />
+    <MESSAGE value="last fixes for charts data import needed" />
+    <option name="LAST_COMMIT_MESSAGE" value="last fixes for charts data import needed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -820,31 +820,17 @@
     <entry file="file://$PROJECT_DIR$/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
-          <caret line="9" column="90" lean-forward="false" selection-start-line="9" selection-start-column="90" selection-end-line="9" selection-end-column="90" />
+          <caret line="9" column="80" lean-forward="false" selection-start-line="9" selection-start-column="80" selection-end-line="9" selection-end-column="80" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/View.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="573">
-          <caret line="224" column="73" lean-forward="false" selection-start-line="224" selection-start-column="73" selection-end-line="224" selection-end-column="73" />
+        <state relative-caret-position="335">
+          <caret line="210" column="40" lean-forward="true" selection-start-line="210" selection-start-column="40" selection-end-line="210" selection-end-column="40" />
           <folding>
             <element signature="e#0#68#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/simulations.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="19" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="19" />
-          <folding>
-            <marker date="1516661167018" expanded="true" signature="617:983" ph="..." />
-            <marker date="1516661167018" expanded="true" signature="709:981" ph="{&quot;type&quot;: 'line'...}" />
-            <marker date="1516661167018" expanded="true" signature="759:969" ph="{&quot;labels&quot;: label...}" />
-            <marker date="1516661167018" expanded="true" signature="822:920" ph="[...]" />
-            <marker date="1516661167018" expanded="true" signature="823:919" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -852,7 +838,15 @@
     <entry file="file://$PROJECT_DIR$/templates/results.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
-          <caret line="25" column="31" lean-forward="true" selection-start-line="25" selection-start-column="31" selection-end-line="25" selection-end-column="31" />
+          <caret line="25" column="31" lean-forward="false" selection-start-line="25" selection-start-column="31" selection-end-line="25" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/simulations.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="58">
+          <caret line="14" column="34" lean-forward="false" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
           <folding />
         </state>
       </provider>

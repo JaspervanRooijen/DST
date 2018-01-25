@@ -8,59 +8,66 @@ Bliepbloep
 <br><br><br>
 
 
-
 <script>
     var datasets = {{data | safe}};
 
     for (var sweepValue in datasets) {
         var dataset = datasets[sweepValue];
-        var name = 'chart'+sweepValue.toString();
-        document.write("<canvas id="+name+" width=\"400\" height=\"400\"></canvas>");
+        var name = 'chart' + sweepValue.toString();
+        document.write("<canvas id=" + name + " width=\"200\" height=\"200\"></canvas>");
 
         var ctx = document.getElementById(name);
-        var chart = new Chart(ctx, {
-            type:'line',
-            data: dataset
-        })
+        console.log(ctx);
+        var labels = [];
+
+        console.log(dataset);
+
+        chart_datasets = [];
+
+
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF'.split('');
+            var color = '#';
+            for (var i = 0; i < 6; i++ ) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        for (var run in dataset) {
+            chart_datasets.push({data:dataset[run], fill:false, label:run, borderColor:getRandomColor()});
+        }
+
+
+        ctx = document.getElementById(name);
+        var myLineChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: chart_datasets
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: name
+                },
+                scales: {
+                    xAxes: [{
+                        type: 'linear',
+                        position: 'bottom',
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'x axis'
+                        },
+                    }]
+                },
+                elements: {
+                    line: {
+                        tension: 0, // disables bezier curves
+                    }
+                }
+            }});
     }
-
-    function createCanvas(name, data) {
-        canvas = "<canvas id="+name+" width=\"1000\" height=\"500\"></canvas> \
-        ctx = document.getElementById({{dataset}}); \
-        myLineChart = new Chart(ctx, { \
-            type: 'line', \
-            data: { \
-                labels: label, \
-                datasets: [{ \
-                    data:"+data+", \
-                    lineTension: 0, \
-                }], \
-                options: [{}] \
-            } \
-        });";
-
-    }
-
-
-
-//    var datasets = {{data | safe}};
-//
-//    for (var sweepValue in datasets) {
-//        var dataset = datasets[sweepValue];
-//        document.write(sweepValue);
-//        document.write("<br>");
-//        for (var path in dataset) {
-//            for (var point in dataset[path]) {
-//                document.write(dataset[path][point]["x"]);
-//                document.write("<br>");
-//                document.write(dataset[path][point]["y"]);
-//                document.write("<br>");
-//            }
-//            document.write("<br>");
-//            document.write("<br>");
-//        }
-//    }
-
 
 </script>
 
