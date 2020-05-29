@@ -71,7 +71,7 @@ class Master:
     def get_sweeps(self):
         return self.combinator.get_sweeps()
 
-    def simulate(self, amount, query):
+    def simulate(self, query):
         print('simulating!!')
         result = {}
         combinations = self.combinator.get_combinations()
@@ -94,9 +94,8 @@ class Master:
             # with open(self.query, 'r') as f:
             #     print(f.read())
 
-            q = 'simulate %s [<=888] {%s}' % (str(amount), query)   #Todo: Fix hardcode final time
-
-            res = self.verifier.simulate(file, q)
+            # q = 'simulate %s [<=50] {%s}' % (str(amount), query)   #Todo: Fix hardcode final time
+            res = self.verifier.simulate(file, query)
             # print('\n\n')
             # print(res)
             # print('\n')

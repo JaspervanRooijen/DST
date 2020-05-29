@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 import json
 import os
 from werkzeug.utils import secure_filename
@@ -81,6 +81,7 @@ class GuiView:
         :param controller:
         """
         global gui
+        print("Upload folder: " + UPLOAD_FOLDER)
         gui = self
         self.controller = controller
         try:
@@ -119,6 +120,7 @@ def upload_file():
     :return: upload_file.html, containing the form for uploading files.
     """
     global gui
+    print(request.data)
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
@@ -132,6 +134,7 @@ def upload_file():
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
+            print(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             gui.controller.main('openFile %s' % os.path.join(app.config['UPLOAD_FOLDER'], filename))
             return redirect('/data')
@@ -193,9 +196,9 @@ def simulate():
     :return: 
     """""
     global gui
-    amount = request.args.get('sims', '')
+    # amount = request.args.get('sims', '')
     query = request.args.get('query', '')
-    result = gui.controller.simulate(amount, query)
+    result = gui.controller.simulate(query)
     # print(result)
     all_sets = {}
     for key in result.keys():

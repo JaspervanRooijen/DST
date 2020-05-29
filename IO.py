@@ -69,7 +69,10 @@ class IO:
 
     def create_simulation(self, amount, query):
         file = File()
-        cont = 'simulate [<=%s] {%s}' % (str(amount), query)
+        print("Amount: " + str(amount))
+        print("Query: " + str(query))
+        # cont = 'simulate [<=%s] {%s}' % (str(amount), query)
+        cont = query
         file.open_file('/q2.q')
         f = file.write_file_full(cont, file_name='/q2.q')
         return f

@@ -25,8 +25,13 @@ class Verifier:
         f.write(query)
         print('File: ' + file.name)
         print('QueryFile: ' + f.name)
+        print("Query: " + query)
         f.close()
-        verify = subprocess.check_output(["verifyta", file.name, f.name], shell=True)
+        print("Verifying: [\"verifyta\", %s, %s]" % (file.name, f.name))
+        try:
+            verify = subprocess.check_output(["verifyta", file.name, f.name]) #, shell=True)
+        finally:
+            print("OUTCOME: " + verify.decode())
         str_verify = str(verify.decode())
         str_verify = str_verify.split('\n')
 

@@ -83,7 +83,7 @@ class Controller:
         print('Graceful exit!')
         quit(0)
 
-    def simulate(self, amount, query):
+    def simulate(self, query):
         """
         Used for simulating an amount of runs, considering parameter query.
         :param amount: The amount of runs that should be carried out over the UPPAAL-model stored in the Model.
@@ -94,7 +94,7 @@ class Controller:
         > simulate(2, 'cost')
         > [ [ (0,0), (1,1), (2,2) ], [ (0,0), (1,2), (2,2) ] ]
         """
-        return self.master.simulate(amount, query)
+        return self.master.simulate(query)
 
 
 c = Controller()

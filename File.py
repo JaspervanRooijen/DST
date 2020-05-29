@@ -26,12 +26,16 @@ class File:
             self.file.close()
 
     def write_file(self, cont):
-        path = os.getcwd().replace("\\", "/")
-        path += '/tmp/'
+        path = os.getcwd()          # .replace("\\", "/")
+        print("Os.getcwd: " + path)
+        path = os.path.join(path, "tmp")
+        print("+ /tmp/ : " + path)
         if not os.path.exists(path):
             os.makedirs(path)
-        path += self.file_name
-        f = open(path, 'w')
+        print("Filename: " + self.file_name.split('/')[-1])
+        path = os.path.join(path, self.file_name.split('/')[-1])
+        print("+ filename : " + path)
+        f = open(path, 'w+')
         f.write(cont)
         f.close()
         return f
