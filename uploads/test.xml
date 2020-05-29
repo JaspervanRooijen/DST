@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
+<nta>
+	<declaration>// Place global declarations here.</declaration>
+	<template>
+		<name x="5" y="5">Template</name>
+		<declaration>// Place local declarations here.
+
+clock x;
+const int TIME = 20;</declaration>
+		<location id="id0" x="-161" y="-195">
+			<name x="-171" y="-229">Finish</name>
+		</location>
+		<location id="id1" x="-306" y="-195">
+			<name x="-316" y="-229">Start</name>
+			<label kind="invariant" x="-316" y="-178">x &lt;= TIME</label>
+		</location>
+		<init ref="id1"/>
+		<transition>
+			<source ref="id1"/>
+			<target ref="id0"/>
+			<label kind="guard" x="-280" y="-221">x &gt;= 10</label>
+		</transition>
+	</template>
+	<system>// Place template instantiations here.
+Process = Template();
+// List one or more processes to be composed into a system.
+system Process;
+    </system>
+	<queries>
+		<query>
+			<formula>simulate [&lt;= 20; 1] { Process.Finish }</formula>
+			<comment></comment>
+		</query>
+	</queries>
+</nta>
